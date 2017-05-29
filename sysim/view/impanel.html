@@ -1,0 +1,129 @@
+<div class="webim-chatwindow ">
+    <div class="webim-chatwindow-title">
+        {{currentChat.name}}{{currentChat.type=='groupchat'?'('+currentChat.affiliations_count+')':''}}<i ng-show="currentChat.type=='groupchat'" class="webim-down-icon font smallest  dib webim-down-icon" id="memberOption">D</i>
+    </div>
+    <div class="webim-chatwindow-msg">
+        <div class="webim-msg-container rel" ng-model="currentChat" ng-repeat="msg in currentChat.msglist">
+            <div data-reactroot="" class="rel" ng-class="{true:'right',false:'left'}[msg.from==currentUserName]">
+                <div class="webim-avatar-icon small" ng-class="{true:'right',false:'left'}[msg.from==currentUserName]"><img class="w100" src="images/default.png" ng-click="showMenu($event)"></div>
+                <p ng-class="{true:'right',false:'left'}[msg.from==currentUserName]">{{msg.from}} {{msg.time}}</p>
+                <div class="clearfix">
+                    <div class="webim-msg-value">
+                        <span class="webim-msg-icon font">{{msg.from==currentUserName? 'I':'H'}}</span><pre>{{msg.data}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="webim-send-wrapper">
+        <div class="webim-send-tags">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                    <input type="checkbox" />领导批示
+                </label>
+                <label class="btn btn-primary">
+                    <input type="checkbox" />指挥调度
+                </label>
+                <label class="btn btn-primary">
+                    <input type="checkbox" />任务研判
+                </label>
+                <label class="btn btn-primary">
+                    <input type="checkbox" />阅读回执
+                </label>
+            </div>
+            <button type="button" class="btn btn-primary">...</button>
+        </div>
+        <div class="webim-chatwindow-options">
+            <span class="webim-emoji-icon font smaller">J</span>
+            <span class="webim-picture-icon font smaller">K</span>
+            <span class="webim-audio-icon font smaller">R</span>
+            <span class="webim-file-icon font smaller">S</span>
+        </div>
+        <textarea ng-model="inputMessage"></textarea>
+        <button class="webim-send-btn btn btn-primary btn-sm" ng-click="sendMessage()">发送</button>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="groupModel" tabindex="-1" role="dialog" aria-labelledby="groupModelLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="groupModelLabel">添加/删除成员</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+                <input class="form-control" type="text"  />
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">搜索</button>
+                </span>
+            </div>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      研发部 1/6
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    <div class="member-optpanel-item">
+                        <input type="checkbox" />
+                        <img src="images/default.png" />
+                        <span>张梦乔</span>
+                        <div class="member-optpanel-labels">
+                            <span class="label label-success">盘查APP</span>
+                            <span class="label label-danger">处警APP</span>
+                            <span class="label label-info">办公APP</span>
+                        </div>
+                    </div>
+                    <div class="member-optpanel-item">
+                        <input type="checkbox" />
+                        <img src="images/default.png" />
+                        <span>系统管理员</span>
+                        <div class="member-optpanel-labels">
+                            <span class="label label-info">办公APP</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      集成部 0/1
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="panel-body">
+                    <div class="member-optpanel-item">
+                        <input type="checkbox" />
+                        <img src="images/default.png" />
+                        <span>小张</span>
+                        <div class="member-optpanel-labels">
+                            <span class="label label-danger">处警APP</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <ul class="dropdown-menu" id="optMenu">
+        <li><a href="#">查看详细资料</a></li>
+        <li><a href="#">查看当前位置</a></li>
+        <li><a href="#">发起实时视频</a></li>
+        <li><a href="#">...</a></li>
+    </ul>
+</div>

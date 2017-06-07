@@ -1,4 +1,4 @@
-var imApp = angular.module('imApp',[]);
+var imApp = angular.module('imApp',['treeGrid']);
 
 //登录状态
 const LOGIN_STATUS_DEACTIVE = -1;//未登录

@@ -19,12 +19,25 @@ imApp.controller('ImPanelCtrl', function($scope, webservice){
     $scope.findChatContext = function(type, to, from){
         var ret = null;
         if(type==CHAT_TYPE_SINGLE){
-            for(var i=0; i<$scope.friendList.length; i++){
-                if($scope.friendList[i].name==from){
-                    ret = $scope.friendList[i];
-                    break;
+//          for(var i=0; i<$scope.friendList.length; i++){
+//              if($scope.friendList[i].name==from){
+//                  ret = $scope.friendList[i];
+//                  break;
+//              }
+//          }
+            function getFrientByCName(arr, name){
+                for(var i=0; i<arr.length; i++){
+                    if(arr[i].name == name){
+                        return arr[i];
+                    }else{
+                        if(arr[i].children && arr[i].children.length && arr[i].children.length>0){
+                            return getFrientByCName(arr[i].children, name);
+                        }
+                    }
                 }
+                return null;
             }
+            ret = getFrientByCName($scope.friendList, from);
         }else if(type == CHAT_TYPE_GROUP){
             for(var i=0; i<$scope.groupList.length; i++){
                 if($scope.groupList[i].roomId==to){

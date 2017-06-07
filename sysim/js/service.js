@@ -75,18 +75,21 @@ imApp.service('webservice', function($rootScope){
     
     //获取好友列表
     this.getFriendList = function(successCallback, failCallback){
-        this.connection.getRoster({
-            success: function(roster){
-                var ret = [];
-                for(var i=0; i<roster.length; i++){
-                    var ros = roster[i];
-                    if(ros.subscription === 'both' || ros.subscription === 'to'){
-                        ret.push(ros);
-                    }
-                }
-                successCallback(ret);
-            }
-        })
+//      this.connection.getRoster({
+//          success: function(roster){
+//              var ret = [];
+//              for(var i=0; i<roster.length; i++){
+//                  var ros = roster[i];
+//                  if(ros.subscription === 'both' || ros.subscription === 'to'){
+//                      ret.push(ros);
+//                  }
+//              }
+//              successCallback(ret);
+//          }
+//      })
+        $.getJSON('friend.json', {}, function(data){
+            successCallback(data);
+        });
     }
     
     //获取群组列表
